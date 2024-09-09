@@ -1,7 +1,11 @@
-import info from "@/info.json";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Packages } from "./schema";
 
-export const PackagesCard = () => {
+export const PackagesCard = ({
+  rpm_count,
+  system_flatpak_count,
+  user_flatpak_count,
+}: Packages) => {
   return (
     <Card className="max-w-sm h-fit">
       <CardHeader className="">
@@ -12,7 +16,7 @@ export const PackagesCard = () => {
           <div>
             <div className="text-sm text-muted-foreground mb-1">RPMs</div>
             <div className="text-xl font-bold tabular-nums leading-none">
-              {info.packages.rpm_count}
+              {rpm_count}
             </div>
           </div>
           <div>
@@ -20,7 +24,7 @@ export const PackagesCard = () => {
               System Flatpaks
             </div>
             <div className="text-xl font-bold tabular-nums leading-none">
-              {info.packages.system_flatpak_count}
+              {system_flatpak_count}
             </div>
           </div>
           <div>
@@ -28,7 +32,7 @@ export const PackagesCard = () => {
               User Flatpaks
             </div>
             <div className="text-xl font-bold tabular-nums leading-none">
-              {info.packages.user_flatpak_count}
+              {user_flatpak_count}
             </div>
           </div>
         </div>

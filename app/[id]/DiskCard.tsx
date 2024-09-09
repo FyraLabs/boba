@@ -1,15 +1,15 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import info from "@/info.json";
+import { Disk } from "./schema";
 
-export const DiskCard = () => {
+export const DiskCard = (disks: Disk[]) => {
   return (
     <Card className="max-w-sm h-fit">
       <CardHeader className="">
         <CardTitle>Disks</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        {info.disks.map((disk, i) => (
+        {disks.map(({ controller, model, name, type }, i) => (
           <>
             {i !== 0 ? <Separator /> : null}
             <div className="grid flex-col w-full gap-4 grid-cols-2">
@@ -18,13 +18,13 @@ export const DiskCard = () => {
                   Disk #{i}
                 </div>
                 <div className="text-xl font-bold tabular-nums leading-none">
-                  {disk.model}
+                  {model}
                 </div>
               </div>
               <div>
                 <div className="text-sm text-muted-foreground mb-1">Type</div>
                 <div className="text-xl font-bold tabular-nums leading-none">
-                  {disk.type}
+                  {type}
                 </div>
               </div>
               <div>
@@ -32,7 +32,7 @@ export const DiskCard = () => {
                   Controller
                 </div>
                 <div className="text-xl font-bold tabular-nums leading-none">
-                  {disk.controller}
+                  {controller}
                 </div>
               </div>
               <div>
@@ -40,7 +40,7 @@ export const DiskCard = () => {
                   Identifier
                 </div>
                 <div className="text-xl font-bold tabular-nums leading-none">
-                  {disk.name}
+                  {name}
                 </div>
               </div>
             </div>

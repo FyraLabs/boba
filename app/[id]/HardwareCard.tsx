@@ -1,12 +1,20 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import info from "@/info.json";
 import byteSize from "byte-size";
+import { Hardware } from "./schema";
 
-export const HardwareCard = () => {
-  const physicalMemory = byteSize(info.hardware.physical_memory);
-  const usableMemory = byteSize(info.hardware.usable_memory);
-  const swap = byteSize(info.hardware.swap);
+export const HardwareCard = ({
+  physical_memory,
+  usable_memory,
+  swap,
+  vendor,
+  product,
+  cpus,
+  gpus,
+}: Hardware) => {
+  const physicalMemory = byteSize(physical_memory);
+  const usableMemory = byteSize(usable_memory);
+  const swapMemory = byteSize(swap);
 
   return (
     <Card className="max-w-sm h-fit">
@@ -18,13 +26,13 @@ export const HardwareCard = () => {
           <div>
             <div className="text-sm text-muted-foreground mb-1">Vendor</div>
             <div className="text-xl font-bold tabular-nums leading-none">
-              {info.hardware.vendor}
+              {vendor}
             </div>
           </div>
           <div>
             <div className="text-sm text-muted-foreground mb-1">Product</div>
             <div className="text-xl font-bold tabular-nums leading-none break-all">
-              {info.hardware.product}
+              {product}
             </div>
           </div>
           <div>
@@ -52,14 +60,14 @@ export const HardwareCard = () => {
           <div>
             <div className="text-sm text-muted-foreground mb-1">Swap</div>
             <div className="text-xl font-bold tabular-nums leading-none">
-              {swap.value}{" "}
+              {swapMemory.value}{" "}
               <span className="text-sm font-normal text-muted-foreground">
-                {swap.unit}
+                {swapMemory.unit}
               </span>
             </div>
           </div>
         </div>
-        {info.hardware.cpus.map((cpu, i) => (
+        {cpus.map((cpu, i) => (
           <>
             <Separator />
             <div className="flex flex-col gap-4">
@@ -80,7 +88,7 @@ export const HardwareCard = () => {
             </div>
           </>
         ))}
-        {info.hardware.gpus.map((gpu, i) => (
+        {gpus.map((gpu, i) => (
           <>
             <Separator />
             <div className="flex flex-col gap-4">

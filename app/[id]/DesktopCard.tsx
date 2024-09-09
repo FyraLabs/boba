@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import info from "@/info.json";
+import { Desktop, DisplayProtocol } from "./schema";
 
-export const DesktopCard = () => {
+export const DesktopCard = ({ name, protocol }: Desktop) => {
   return (
     <Card className="max-w-sm h-fit">
       <CardHeader className="">
@@ -11,15 +11,15 @@ export const DesktopCard = () => {
         <div>
           <div className="text-sm text-muted-foreground mb-1">Name</div>
           <div className="text-xl font-bold tabular-nums leading-none">
-            {info.desktop.name}
+            {name}
           </div>
         </div>
         <div>
           <div className="text-sm text-muted-foreground mb-1">Protocol</div>
           <div className="text-xl font-bold tabular-nums leading-none">
-            {info.desktop.protocol === 1
+            {protocol === DisplayProtocol.Wayland
               ? "Wayland"
-              : info.desktop.protocol === 2
+              : protocol === DisplayProtocol.X11
                 ? "X11"
                 : "Unknown"}
           </div>
