@@ -17,5 +17,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     notFound();
   }
 
-  return <View data={data} />;
+  const plainArray = Array.from(new Uint8Array(data));
+
+  return <View data={plainArray} />;
 }

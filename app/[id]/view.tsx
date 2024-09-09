@@ -15,10 +15,8 @@ const hexToArrayBuffer = (hex: string) => {
   return new Uint8Array(arr).buffer;
 };
 
-const decryptSystemInfo = async (
-  data: ArrayBuffer,
-  decryptionPayload: string,
-) => {
+const decryptSystemInfo = async (data: number[], decryptionPayload: string) => {
+  const dataBuffer = new Uint8Array(data).buffer;
   const decryptonPayloadData = hexToArrayBuffer(decryptionPayload);
   // 32 bytes for key, 12 bytes for nonce
   if (decryptonPayloadData.byteLength != 44) {
@@ -40,7 +38,7 @@ const decryptSystemInfo = async (
   const plaintext = await crypto.subtle.decrypt(
     { name: "AES-GCM", iv: nonceData },
     key,
-    data,
+    dataBuffer,
   );
 
   const infoObject = JSON.parse(new TextDecoder().decode(plaintext));
@@ -48,9 +46,8 @@ const decryptSystemInfo = async (
   return infoSchema.parse(infoObject);
 };
 
-export default function View({ data }: { data: ArrayBuffer }) {
+export default function View({ data }: { data: number[] }) {
   const info = use(decryptSystemInfo(data, window.location.hash.slice(1)));
-  console.log(info);
 
   return (
     <div className="flex flex-col gap-6 p-6">
