@@ -6,18 +6,18 @@ export const runtime = "edge";
 
 const View = dynamic(() => import("./view"), { ssr: false });
 
-export default async function Page({ params }: { params: { id: string } }) {
+const Page = async ({ params }: { params: { id: string } }) => {
   const {
     env: { BOBA_KV: kv },
   } = getRequestContext();
 
-  const data = await kv.get(`uploads/${params.id}`, { type: "arrayBuffer" });
+  const data = await kv.get(`uploads/${params.id}`);
 
   if (data === null) {
     notFound();
   }
 
-  const plainArray = Array.from(new Uint8Array(data));
+  return <View data={data} />;
+};
 
-  return <View data={plainArray} />;
-}
+export default Page;

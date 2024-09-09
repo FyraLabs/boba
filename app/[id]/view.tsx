@@ -1,22 +1,20 @@
 "use client";
 
-import { OSCard } from "./OSCard";
-import { StatusCard } from "./StatusCard";
-import { DesktopCard } from "./DesktopCard";
-import { PackagesCard } from "./PackagesCard";
-import { NetworkCard } from "./NetworkCard";
-import { DiskCard } from "./DiskCard";
-import { HardwareCard } from "./HardwareCard";
-import { infoSchema } from "./schema";
-import { Suspense, use } from "react";
+import {
+  OSCard,
+  StatusCard,
+  DesktopCard,
+  PackagesCard,
+  NetworkCard,
+  DiskCard,
+  HardwareCard,
+} from "./_cards";
+import { infoSchema } from "@/lib/schema";
+import { use } from "react";
+import { hexToArrayBuffer } from "@/lib/utils";
 
-const hexToArrayBuffer = (hex: string) => {
-  const arr = hex.match(/.{1,2}/g)!.map((byte) => parseInt(byte, 16));
-  return new Uint8Array(arr).buffer;
-};
-
-const decryptSystemInfo = async (data: number[], decryptionPayload: string) => {
-  const dataBuffer = new Uint8Array(data).buffer;
+const decryptSystemInfo = async (data: string, decryptionPayload: string) => {
+  const dataBuffer = hexToArrayBuffer(data);
   const decryptonPayloadData = hexToArrayBuffer(decryptionPayload);
   // 32 bytes for key, 12 bytes for nonce
   if (decryptonPayloadData.byteLength != 44) {
@@ -46,7 +44,7 @@ const decryptSystemInfo = async (data: number[], decryptionPayload: string) => {
   return infoSchema.parse(infoObject);
 };
 
-function InnerView({ data }: { data: number[] }) {
+const View = ({ data }: { data: string }) => {
   const info = use(decryptSystemInfo(data, window.location.hash.slice(1)));
 
   return (
@@ -62,8 +60,8 @@ function InnerView({ data }: { data: number[] }) {
           <PackagesCard {...info.packages} />
         </div>
         <div className="flex flex-col gap-6">
-          <NetworkCard {...info.network_devices} />
-          <DiskCard {...info.disks} />
+          <NetworkCard devices={info.network_devices} />
+          <DiskCard disks={info.disks} />
         </div>
         <div>
           <HardwareCard {...info.hardware} />
@@ -74,12 +72,6 @@ function InnerView({ data }: { data: number[] }) {
       </footer>
     </div>
   );
-}
+};
 
-export default function View({ data }: { data: number[] }) {
-  return (
-    <Suspense fallback={<>Loading...</>}>
-      <InnerView data={data} />
-    </Suspense>
-  );
-}
+export default View;

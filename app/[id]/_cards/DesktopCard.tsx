@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Desktop, DisplayProtocol } from "./schema";
+import { Desktop, DisplayProtocol } from "@/lib/schema";
 
 export const DesktopCard = ({ name, protocol }: Desktop) => {
   return (

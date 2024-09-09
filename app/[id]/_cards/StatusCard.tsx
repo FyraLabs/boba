@@ -3,7 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { Status } from "./schema";
+import { Status } from "@/lib/schema";
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
 

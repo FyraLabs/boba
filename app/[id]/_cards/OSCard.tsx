@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { OS } from "./schema";
+import { OS } from "@/lib/schema";
 
 export const OSCard = ({ name, version, variant, atomic }: OS) => {
   return (

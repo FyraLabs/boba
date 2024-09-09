@@ -1,8 +1,9 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Disk } from "./schema";
+import { Disk } from "@/lib/schema";
+import { Fragment } from "react";
 
-export const DiskCard = (disks: Disk[]) => {
+export const DiskCard = ({ disks }: { disks: Disk[] }) => {
   return (
     <Card className="max-w-sm h-fit">
       <CardHeader className="">
@@ -10,7 +11,7 @@ export const DiskCard = (disks: Disk[]) => {
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         {disks.map(({ controller, model, name, type }, i) => (
-          <>
+          <Fragment key={name}>
             {i !== 0 ? <Separator /> : null}
             <div className="grid flex-col w-full gap-4 grid-cols-2">
               <div>
@@ -44,7 +45,7 @@ export const DiskCard = (disks: Disk[]) => {
                 </div>
               </div>
             </div>
-          </>
+          </Fragment>
         ))}
       </CardContent>
     </Card>

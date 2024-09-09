@@ -1,8 +1,7 @@
+import { EXPIRATION_TIME, MAX_UPLOAD_SIZE } from "@/lib/constants";
+import { arrayBufferToHex } from "@/lib/utils";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import { nanoid } from "nanoid";
-
-const MAX_UPLOAD_SIZE = 2 ** 10 * 5; // 5KB
-const EXPIRATION_TIME = 60 * 60 * 24 * 7; // 7 days
 
 export const runtime = "edge";
 
@@ -17,8 +16,13 @@ export const POST = async (request: Request) => {
     env: { BOBA_KV: kv },
   } = getRequestContext();
 
-  // Expiration time is 7 days
-  await kv.put(`uploads/${id}`, buf, { expirationTtl: EXPIRATION_TIME });
+  const hex = arrayBufferToHex(buf);
+
+  // You know, I'd just put the bytes here, but for some reason the KV API (ONLY IN MINIFLARE) fucks out
+  // I regret using Cloudflare pages
+  await kv.put(`uploads/${id}`, hex, {
+    expirationTtl: EXPIRATION_TIME,
+  });
 
   return Response.json({ ok: true, id });
 };

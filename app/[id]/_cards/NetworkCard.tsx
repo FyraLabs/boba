@@ -1,8 +1,9 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { NetworkDevice } from "./schema";
+import { NetworkDevice } from "@/lib/schema";
+import { Fragment } from "react";
 
-export const NetworkCard = (devices: NetworkDevice[]) => {
+export const NetworkCard = ({ devices }: { devices: NetworkDevice[] }) => {
   return (
     <Card className="max-w-sm h-fit">
       <CardHeader className="">
@@ -10,7 +11,7 @@ export const NetworkCard = (devices: NetworkDevice[]) => {
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         {devices.map(({ type, interface: iface, connected }, i) => (
-          <>
+          <Fragment key={iface}>
             {i !== 0 ? <Separator /> : null}
             <div className="grid flex-col w-full gap-4 grid-cols-2">
               <div>
@@ -36,7 +37,7 @@ export const NetworkCard = (devices: NetworkDevice[]) => {
                 </div>
               </div>
             </div>
-          </>
+          </Fragment>
         ))}
       </CardContent>
     </Card>

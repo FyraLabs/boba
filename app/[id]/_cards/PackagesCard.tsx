@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Packages } from "./schema";
+import { Packages } from "@/lib/schema";
 
 export const PackagesCard = ({
   rpm_count,

@@ -1,7 +1,8 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import byteSize from "byte-size";
-import { Hardware } from "./schema";
+import { Hardware } from "@/lib/schema";
+import { Fragment } from "react";
 
 export const HardwareCard = ({
   physical_memory,
@@ -67,8 +68,8 @@ export const HardwareCard = ({
             </div>
           </div>
         </div>
-        {cpus.map((cpu, i) => (
-          <>
+        {cpus.map(({ model, arch }, i) => (
+          <Fragment key={model}>
             <Separator />
             <div className="flex flex-col gap-4">
               <div>
@@ -76,20 +77,20 @@ export const HardwareCard = ({
                   CPU #{i}
                 </div>
                 <div className="text-xl font-bold tabular-nums leading-none">
-                  {cpu.model}
+                  {model}
                 </div>
               </div>
               <div>
                 <div className="text-sm text-muted-foreground mb-1">Arch</div>
                 <div className="text-xl font-bold tabular-nums leading-none">
-                  {cpu.arch}
+                  {arch}
                 </div>
               </div>
             </div>
-          </>
+          </Fragment>
         ))}
-        {gpus.map((gpu, i) => (
-          <>
+        {gpus.map(({ name, driver }, i) => (
+          <Fragment key={name}>
             <Separator />
             <div className="flex flex-col gap-4">
               <div>
@@ -97,17 +98,17 @@ export const HardwareCard = ({
                   GPU #{i}
                 </div>
                 <div className="text-xl font-bold tabular-nums leading-none">
-                  {gpu.name}
+                  {name}
                 </div>
               </div>
               <div>
                 <div className="text-sm text-muted-foreground mb-1">Driver</div>
                 <div className="text-xl font-bold tabular-nums leading-none">
-                  {gpu.driver}
+                  {driver}
                 </div>
               </div>
             </div>
-          </>
+          </Fragment>
         ))}
       </CardContent>
     </Card>

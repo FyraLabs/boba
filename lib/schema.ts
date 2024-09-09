@@ -1,3 +1,5 @@
+// Zod schema definitions and types for UM cli's output
+
 import { z } from "zod";
 
 export enum DisplayProtocol {
