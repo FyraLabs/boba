@@ -5,7 +5,7 @@ import { Fragment } from "react";
 
 export const NetworkCard = ({ devices }: { devices: NetworkDevice[] }) => {
   return (
-    <Card className="max-w-sm h-fit">
+    <Card className="h-fit">
       <CardHeader className="text-2xl">
         <CardTitle>Network</CardTitle>
       </CardHeader>

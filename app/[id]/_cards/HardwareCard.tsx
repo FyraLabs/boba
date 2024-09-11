@@ -21,7 +21,7 @@ export const HardwareCard = ({
   const swapMemory = useMemo(() => byteSize(swap), [swap]);
 
   return (
-    <Card className="max-w-sm h-fit">
+    <Card className="h-fit">
       <CardHeader className="text-2xl">
         <CardTitle>Hardware</CardTitle>
       </CardHeader>

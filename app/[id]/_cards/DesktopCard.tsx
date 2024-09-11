@@ -3,7 +3,7 @@ import { Desktop, DisplayProtocol } from "@/lib/schema";
 
 export const DesktopCard = ({ name, protocol }: Desktop) => {
   return (
-    <Card className="max-w-sm h-fit">
+    <Card className="h-fit">
       <CardHeader className="text-2xl">
         <CardTitle>Desktop</CardTitle>
       </CardHeader>

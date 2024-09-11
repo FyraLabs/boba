@@ -10,8 +10,9 @@ import {
   HardwareCard,
 } from "./_cards";
 import { infoSchema } from "@/lib/schema";
-import { use } from "react";
+import { Suspense, use } from "react";
 import { hexToArrayBuffer } from "@/lib/utils";
+import { Loader } from "./loader";
 
 const decryptSystemInfo = async (data: string, decryptionPayload: string) => {
   const dataBuffer = hexToArrayBuffer(data);
@@ -48,26 +49,21 @@ const View = ({ data }: { data: string }) => {
   const info = use(decryptSystemInfo(data, window.location.hash.slice(1)));
 
   return (
-    <div className="flex flex-col gap-6 p-6">
-      <main className="grid grid-cols-[repeat(auto-fit,minmax(375px,max-content))] gap-6 max-w-full">
-        <div className="flex flex-col gap-6">
-          <OSCard {...info.os} />
-          <StatusCard {...info.status} />
-          <DesktopCard {...info.desktop} />
-          <PackagesCard {...info.packages} />
-        </div>
-        <div className="flex flex-col gap-6">
-          <NetworkCard devices={info.network_devices} />
-          <DiskCard disks={info.disks} />
-        </div>
-        <div>
-          <HardwareCard {...info.hardware} />
-        </div>
-      </main>
-      <footer>
-        <p className="text-muted-foreground">🄯 Fyra Labs — Boba</p>
-      </footer>
-    </div>
+    <>
+      <div className="flex flex-col gap-6 basis-96 flex-1">
+        <OSCard {...info.os} />
+        <StatusCard {...info.status} />
+        <DesktopCard {...info.desktop} />
+        <PackagesCard {...info.packages} />
+      </div>
+      <div className="flex flex-col gap-6 basis-96 flex-1">
+        <NetworkCard devices={info.network_devices} />
+        <DiskCard disks={info.disks} />
+      </div>
+      <div className="w-sm basis-96 flex-1">
+        <HardwareCard {...info.hardware} />
+      </div>
+    </>
   );
 };
 

@@ -3,7 +3,7 @@ import { OS } from "@/lib/schema";
 
 export const OSCard = ({ name, version, variant, atomic }: OS) => {
   return (
-    <Card className="max-w-sm h-fit">
+    <Card className="h-fit">
       <CardHeader className="text-2xl">
         <CardTitle>{name}</CardTitle>
       </CardHeader>

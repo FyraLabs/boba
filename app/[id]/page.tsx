@@ -1,10 +1,14 @@
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
+import { Loader } from "./loader";
 
 export const runtime = "edge";
 
-const View = dynamic(() => import("./view"), { ssr: false });
+const View = dynamic(() => import("./view"), {
+  ssr: false,
+  loading: () => <Loader />,
+});
 
 const Page = async ({ params }: { params: { id: string } }) => {
   const {

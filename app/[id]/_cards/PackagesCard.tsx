@@ -7,7 +7,7 @@ export const PackagesCard = ({
   user_flatpak_count,
 }: Packages) => {
   return (
-    <Card className="max-w-sm h-fit">
+    <Card className="h-fit">
       <CardHeader className="text-2xl">
         <CardTitle>Packages</CardTitle>
       </CardHeader>

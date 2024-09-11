@@ -21,7 +21,7 @@ export const StatusCard = ({
   );
 
   return (
-    <Card className="max-w-sm h-fit">
+    <Card className="h-fit">
       <CardHeader className="text-2xl">
         <CardTitle>Status</CardTitle>
       </CardHeader>
