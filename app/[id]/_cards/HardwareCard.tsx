@@ -2,7 +2,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import byteSize from "byte-size";
 import { Hardware } from "@/lib/schema";
-import { Fragment } from "react";
+import { Fragment, useMemo } from "react";
 
 export const HardwareCard = ({
   physical_memory,
@@ -13,9 +13,12 @@ export const HardwareCard = ({
   cpus,
   gpus,
 }: Hardware) => {
-  const physicalMemory = byteSize(physical_memory);
-  const usableMemory = byteSize(usable_memory);
-  const swapMemory = byteSize(swap);
+  const physicalMemory = useMemo(
+    () => byteSize(physical_memory),
+    [physical_memory],
+  );
+  const usableMemory = useMemo(() => byteSize(usable_memory), [usable_memory]);
+  const swapMemory = useMemo(() => byteSize(swap), [swap]);
 
   return (
     <Card className="max-w-sm h-fit">

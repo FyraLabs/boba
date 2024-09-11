@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Status } from "@/lib/schema";
+import { useMemo } from "react";
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
 
@@ -13,7 +14,11 @@ export const StatusCard = ({
   root_filesystem,
   uptime,
 }: Status) => {
-  const free = byteSize(root_disk_free);
+  const free = useMemo(() => byteSize(root_disk_free), [root_disk_free]);
+  const uptimeDuration = useMemo(
+    () => dayjs.duration(uptime * 10 ** 6).humanize(),
+    [uptime],
+  );
 
   return (
     <Card className="max-w-sm h-fit">
@@ -24,7 +29,7 @@ export const StatusCard = ({
         <div>
           <div className="text-sm text-muted-foreground mb-1">Uptime</div>
           <div className="text-xl font-bold tabular-nums leading-none">
-            {dayjs.duration(uptime * 10 ** 6, "ms").humanize()}
+            {uptimeDuration}
           </div>
         </div>
         <div>
