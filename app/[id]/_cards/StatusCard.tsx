@@ -16,7 +16,7 @@ export const StatusCard = ({
 }: Status) => {
   const free = useMemo(() => byteSize(root_disk_free), [root_disk_free]);
   const uptimeDuration = useMemo(
-    () => dayjs.duration(uptime * 10 ** 6).humanize(),
+    () => dayjs.duration(uptime / 10 ** 6).humanize(),
     [uptime],
   );
 
