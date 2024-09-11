@@ -22,7 +22,7 @@ export const StatusCard = ({
 
   return (
     <Card className="max-w-sm h-fit">
-      <CardHeader className="">
+      <CardHeader className="text-2xl">
         <CardTitle>Status</CardTitle>
       </CardHeader>
       <CardContent className="grid flex-col w-full gap-4 grid-cols-2">

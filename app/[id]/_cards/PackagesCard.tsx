@@ -8,7 +8,7 @@ export const PackagesCard = ({
 }: Packages) => {
   return (
     <Card className="max-w-sm h-fit">
-      <CardHeader className="">
+      <CardHeader className="text-2xl">
         <CardTitle>Packages</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col w-full gap-4">

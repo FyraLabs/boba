@@ -22,7 +22,7 @@ export const HardwareCard = ({
 
   return (
     <Card className="max-w-sm h-fit">
-      <CardHeader className="">
+      <CardHeader className="text-2xl">
         <CardTitle>Hardware</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
