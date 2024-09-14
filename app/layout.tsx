@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { ThemeProvider } from "@/components/theme-provider";
+import PlausibleProvider from "next-plausible";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,6 +20,9 @@ export default function RootLayout({
       lang="en"
       className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
     >
+      <head>
+        <PlausibleProvider domain="boba.fyralabs.com" />
+      </head>
       <body>
         <ThemeProvider
           attribute="class"
