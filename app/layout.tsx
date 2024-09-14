@@ -21,7 +21,10 @@ export default function RootLayout({
       className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
     >
       <head>
-        <PlausibleProvider domain="boba.fyralabs.com" />
+        <PlausibleProvider
+          domain="boba.fyralabs.com"
+          customDomain="https://plausible.fyralabs.com"
+        />
       </head>
       <body>
         <ThemeProvider
