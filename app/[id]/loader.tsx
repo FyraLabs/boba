@@ -6,7 +6,7 @@ const SkeletonCard = () => {
 
 export const Loader = () => {
   return (
-    <>
+    <main className="flex flex-wrap gap-6">
       <div className="flex flex-col gap-6 basis-96 flex-1">
         <SkeletonCard />
         <SkeletonCard />
@@ -20,6 +20,6 @@ export const Loader = () => {
       <div className="basis-96 flex-1">
         <SkeletonCard />
       </div>
-    </>
+    </main>
   );
 };
