@@ -12,6 +12,8 @@ import {
 import { infoSchema } from "@/lib/schema";
 import { use } from "react";
 import { hexToArrayBuffer } from "@/lib/utils";
+import dynamic from "next/dynamic";
+import { Loader } from "./loader";
 
 const decryptSystemInfo = async (
   data: string,
@@ -72,4 +74,9 @@ const View = ({ data, nonce }: { data: string; nonce: string }) => {
   );
 };
 
-export default View;
+const ViewWrapper = dynamic(async () => View, {
+  ssr: false,
+  loading: () => <Loader />,
+});
+
+export default ViewWrapper;

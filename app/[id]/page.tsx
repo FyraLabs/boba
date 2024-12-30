@@ -1,22 +1,20 @@
 import { getRequestContext } from "@cloudflare/next-on-pages";
-import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
-import { Loader } from "./loader";
 import { Metadata } from "@/lib/types";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
+import View from "./view";
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
 
 export const runtime = "edge";
 
-const View = dynamic(() => import("./view"), {
-  ssr: false,
-  loading: () => <Loader />,
-});
+type Params = Promise<{ id: string }>;
 
-const Page = async ({ params }: { params: { id: string } }) => {
+const Page = async (props: { params: Params }) => {
+  const params = await props.params;
+
   const {
     env: { BOBA_KV: kv },
   } = getRequestContext();
