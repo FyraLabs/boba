@@ -18,7 +18,7 @@ export const DiskCard = ({ disks }: { disks: Disk[] }) => {
                 <div className="text-sm text-muted-foreground mb-1">
                   Disk #{i}
                 </div>
-                <div className="text-xl font-bold tabular-nums leading-none">
+                <div className="text-xl font-bold tabular-nums leading-none break-all">
                   {model}
                 </div>
               </div>

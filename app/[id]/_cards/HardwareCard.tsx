@@ -79,7 +79,7 @@ export const HardwareCard = ({
                 <div className="text-sm text-muted-foreground mb-1">
                   CPU #{i}
                 </div>
-                <div className="text-xl font-bold tabular-nums leading-none">
+                <div className="text-xl font-bold tabular-nums leading-none break-all">
                   {model}
                 </div>
               </div>
@@ -100,7 +100,7 @@ export const HardwareCard = ({
                 <div className="text-sm text-muted-foreground mb-1">
                   GPU #{i}
                 </div>
-                <div className="text-xl font-bold tabular-nums leading-none">
+                <div className="text-xl font-bold tabular-nums leading-none break-all">
                   {name}
                 </div>
               </div>
