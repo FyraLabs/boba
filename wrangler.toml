@@ -6,3 +6,6 @@ pages_build_output_dir = ".vercel/output/static"
 [[kv_namespaces]]
 binding = "BOBA_KV"
 id = "97856150b20f44c6a227113d616bff61"
+
+[vars]
+NODE_VERSION = "22"
