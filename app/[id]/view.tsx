@@ -9,10 +9,9 @@ import {
   DiskCard,
   HardwareCard,
 } from "./_cards";
-import { infoSchema } from "@/lib/schema";
-import { use } from "react";
+import { Info, infoSchema } from "@/lib/schema";
+import { useEffect, useState } from "react";
 import { hexToArrayBuffer } from "@/lib/utils";
-import dynamic from "next/dynamic";
 import { Loader } from "./loader";
 
 const decryptSystemInfo = async (
@@ -51,9 +50,20 @@ const decryptSystemInfo = async (
 };
 
 const View = ({ data, nonce }: { data: string; nonce: string }) => {
-  const info = use(
-    decryptSystemInfo(data, window.location.hash.slice(1), nonce),
-  );
+  const [info, setInfo] = useState<Info | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const info = await decryptSystemInfo(
+        data,
+        window.location.hash.slice(1),
+        nonce,
+      );
+      setInfo(info);
+    })();
+  }, [data, nonce]);
+
+  if (!info) return <Loader />;
 
   return (
     <main className="flex flex-wrap gap-6">
@@ -74,9 +84,4 @@ const View = ({ data, nonce }: { data: string; nonce: string }) => {
   );
 };
 
-const ViewWrapper = dynamic(async () => View, {
-  ssr: false,
-  loading: () => <Loader />,
-});
-
-export default ViewWrapper;
+export default View;
