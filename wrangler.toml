@@ -1,7 +1,7 @@
 name = "boba"
+main = ".open-next/worker.js"
 compatibility_date = "2024-07-29"
 compatibility_flags = ["nodejs_compat_v2"]
-pages_build_output_dir = ".vercel/output/static"
 
 [[kv_namespaces]]
 binding = "BOBA_KV"
@@ -9,3 +9,7 @@ id = "97856150b20f44c6a227113d616bff61"
 
 [vars]
 NODE_VERSION = "22"
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
