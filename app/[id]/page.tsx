@@ -1,4 +1,4 @@
-import { getRequestContext } from "@cloudflare/next-on-pages";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { notFound } from "next/navigation";
 import { Metadata } from "@/lib/types";
 import dayjs from "dayjs";
@@ -8,8 +8,6 @@ import View from "./view";
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
 
-export const runtime = "edge";
-
 type Params = Promise<{ id: string }>;
 
 const Page = async (props: { params: Params }) => {
@@ -17,7 +15,7 @@ const Page = async (props: { params: Params }) => {
 
   const {
     env: { BOBA_KV: kv },
-  } = getRequestContext();
+  } = getCloudflareContext();
 
   const { value: data, metadata } = await kv.getWithMetadata<Metadata>(
     `uploads/${params.id}`,

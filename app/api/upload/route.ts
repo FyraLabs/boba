@@ -1,10 +1,8 @@
 import { EXPIRATION_TIME, MAX_UPLOAD_SIZE } from "@/lib/constants";
 import { Metadata } from "@/lib/types";
-import { getRequestContext } from "@cloudflare/next-on-pages";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { nanoid } from "nanoid";
 import { z } from "zod";
-
-export const runtime = "edge";
 
 // NOTE: Remember that hex encodes each byte as 2 characters
 const uploadSchema = z.object({
@@ -32,7 +30,7 @@ export const POST = async (request: Request) => {
 
   const {
     env: { BOBA_KV: kv },
-  } = getRequestContext();
+  } = getCloudflareContext();
 
   const currentTime = Math.floor(Date.now() / 1000);
   const expiration = currentTime + EXPIRATION_TIME;
